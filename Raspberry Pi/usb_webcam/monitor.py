@@ -28,13 +28,14 @@ old_image = False
 
 def check_for_movement(old_image, new_image):
     global c
-    diff_image = pygame.PixelArray(new_image).compare(pygame.PixelArray(old_image), distance=0.5, weights=(0.299, 0.587, 0.114))
-    
-    ys = range(0, camera_res[1] / 20)
-    for x in range(0, camera_res[0] / 20):
+    diff_image = pygame.PixelArray(new_image)
+
+    ys = range(0, int(camera_res[1] / 20))
+    for x in range(0, int(camera_res[0] / 20)):
         for y in ys:
-            if diff_image[x*20, y*20] > 0:
+            if diff_image[x*20, y*20] != 0:
                 return True
+
     return False
 
 def led_red():
